@@ -21,6 +21,18 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/1/friends
+  # GET /users/1/friends.json
+  def friends
+    @user    = User.find(params[:id])
+    @friends = @user.friends
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @user }
+    end
+  end
+
   # GET /users/new
   # GET /users/new.json
   def new

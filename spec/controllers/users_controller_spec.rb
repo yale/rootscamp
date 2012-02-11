@@ -34,6 +34,16 @@ describe UsersController do
       assigns(:users).should eq([user])
     end
   end
+    
+  describe "GET friends" do
+    it "assigns user's friends as @friends" do
+      user = User.create! valid_attributes
+      friend = Factory.create :user
+      user.friend_request(friend)
+      get :friends, :id => user.id.to_s
+      assigns(:friends).should eq(user.friends)
+    end
+  end
 
   describe "GET show" do
     it "assigns the requested user as @user" do

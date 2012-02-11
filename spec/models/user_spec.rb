@@ -22,12 +22,20 @@ describe User do
     user.friends.should == []
   end
 
-  describe "#request" do
+  describe "#friend_request" do
+    before :each do
+      @user = User.create(valid_attributes)
+      @friend = Factory :user
+    end
+
     it "adds a new friend" do
-      user = User.create(valid_attributes)
-      friend = Factory :user
-      user.request(friend)
-      user.friends.should == [friend]
+      @user.friend_request(@friend)
+      @user.friends.should == [@friend]
+    end
+
+    it "adds the reverse relationship" do
+      @user.friend_request(@friend)
+      @friend.friends.should == [@user]
     end
   end
 end
