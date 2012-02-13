@@ -10,7 +10,7 @@ require 'rest-client'
 
 EVENTBRITE = HashWithIndifferentAccess.new(YAML.load(File.read(Rails.root.join('config/keys/eventbrite.yml'))))[Rails.env]
 list_attendees = "http://www.eventbrite.com/json/event_list_attendees"
-remote_users = RestClient.get list_attendees, { :params => EVENTBRITE[Rails.env] }
+remote_users = RestClient.get list_attendees, { :params => EVENTBRITE }
 collection = JSON.parse(remote_users)["attendees"]
 collection.each do |attendee|
   u = attendee['attendee']
