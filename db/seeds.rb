@@ -14,11 +14,14 @@ remote_users = RestClient.get list_attendees, { :params => EVENTBRITE }
 collection = JSON.parse(remote_users)["attendees"]
 collection.each do |attendee|
   u = attendee['attendee']
-  user_params = {}
-  user_params.merge!(:name => [u['first_name'], u['last_name']].join(' '))
-  user_params.merge!(:company => u['company']) unless u['company'].blank?
-  unless u['home_city'].blank?
-    user_params.merge!(:location => Location.create(:city => u['home_city']))
+  full_name = [u['first_name'], u['last_name']].join(' ')
+  unless User.exists?(:name => full_name)
+    user_params = {}
+    user_params.merge!(:name => full_name)
+    user_params.merge!(:company => u['company']) unless u['company'].blank?
+    unless u['home_city'].blank?
+      user_params.merge!(:location => Location.create(:city => u['home_city']))
+    end
+    user = User.create(user_params)
   end
-  user = User.create(user_params)
 end
