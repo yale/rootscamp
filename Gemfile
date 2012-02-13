@@ -46,6 +46,8 @@ end
 # To use Jbuilder templates for JSON
 gem 'jbuilder'
 
+gem 'thin'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
