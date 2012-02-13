@@ -25,6 +25,8 @@ gem 'jquery-rails'
 gem 'rabl'
 gem 'yajl-ruby'
 
+gem 'rest-client'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -33,7 +35,6 @@ group :development, :test do
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rspec'
-  gem 'rest-client'
   gem 'pry'
 
   # To use debugger
