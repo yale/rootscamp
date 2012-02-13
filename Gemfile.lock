@@ -81,6 +81,7 @@ GEM
     method_source (0.7.0)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    pg (0.13.1)
     polyglot (0.3.3)
     pry (0.9.8.2)
       coderay (~> 1.0.5)
@@ -149,7 +150,6 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.5)
     thor (0.14.6)
     tilt (1.3.3)
     treetop (1.4.10)
@@ -174,6 +174,7 @@ DEPENDENCIES
   guard-rspec
   jbuilder
   jquery-rails
+  pg
   pry
   rabl
   rails (= 3.2.1)
@@ -181,6 +182,5 @@ DEPENDENCIES
   rspec-rails
   ruby-debug19
   sass-rails (~> 3.2.3)
-  sqlite3
   uglifier (>= 1.0.3)
   yajl-ruby
