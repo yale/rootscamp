@@ -35,6 +35,9 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'rest-client'
   gem 'pry'
+
+  # To use debugger
+  gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 # To use ActiveModel has_secure_password
@@ -49,5 +52,3 @@ gem 'jbuilder'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-gem 'ruby-debug19', :require => 'ruby-debug'
