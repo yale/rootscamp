@@ -11,15 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211210737) do
+ActiveRecord::Schema.define(:version => 20120211235802) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
-    t.boolean  "accepted"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "status",     :default => 0
+  end
+
+  create_table "locations", :force => true do |t|
+    t.integer  "lat"
+    t.integer  "long"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "zip_suffix"
+    t.string   "street"
+    t.string   "city"
+    t.string   "raw_loc"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "status"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
@@ -28,9 +41,10 @@ ActiveRecord::Schema.define(:version => 20120211210737) do
     t.string   "email"
     t.string   "twitter"
     t.string   "fb_id"
-    t.integer  "primary_location_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.integer  "location_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "company"
   end
 
 end

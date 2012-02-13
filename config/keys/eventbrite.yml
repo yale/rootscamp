@@ -1,0 +1,9 @@
+development: &DEFAULTS
+  app_key: VM5ROYOT7FUHFXZ65D
+  id: 2025659803
+
+test:
+  <<: &DEFAULTS
+
+production:
+  <<: &DEFAULTS

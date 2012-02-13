@@ -22,6 +22,9 @@ end
 
 gem 'jquery-rails'
 
+gem 'rabl'
+gem 'yajl-ruby'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
@@ -30,6 +33,8 @@ group :development, :test do
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rspec'
+  gem 'rest-client'
+  gem 'pry'
 end
 
 # To use ActiveModel has_secure_password
