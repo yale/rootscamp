@@ -39,6 +39,8 @@ group :development, :test do
 
   # To use debugger
   gem 'ruby-debug19', :require => 'ruby-debug'
+
+  gem 'sqlite3'
 end
 
 # To use ActiveModel has_secure_password
