@@ -1,9 +1,11 @@
-development: &DEFAULTS
+development:
   app_key: VM5ROYOT7FUHFXZ65D
   id: 2025659803
 
 test:
-  <<: &DEFAULTS
+  app_key: VM5ROYOT7FUHFXZ65D
+  id: 2025659803
 
 production:
-  <<: &DEFAULTS
+  app_key: VM5ROYOT7FUHFXZ65D
+  id: 2025659803
