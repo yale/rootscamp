@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe Friendship do
+describe PrivateContact do
 end

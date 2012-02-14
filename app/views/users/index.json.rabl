@@ -1,2 +1,3 @@
-collection @users
-extends "users/show"
+collection @users do |u|
+  extends "users/base"
+end

@@ -1,6 +1,7 @@
 VALID_ATTRIBUTES = {
   :user => {
-    :name    => "Christopher Hitchens",
+    :first_name   => "Christopher",
+    :last_name    => "Hitchens",
     :phone   => "1-555-867-5309",
     :email   => "chris@example.com",
     :twitter => "@chrishitchens",

@@ -35,13 +35,13 @@ describe UsersController do
     end
   end
     
-  describe "GET friends" do
-    it "assigns user's friends as @friends" do
+  describe "GET private_contacts" do
+    it "assigns user's contacts as @private_contacts" do
       user = User.create! valid_attributes
-      friend = Factory.create :user
-      user.friend_request(friend)
-      get :friends, :id => user.id.to_s, :format => :json
-      assigns(:friends).should eq(user.friends)
+      contact = Factory.create :private_contact
+      user.add_contact!(contact)
+      get :private_contacts, :id => user.id.to_s, :format => :json
+      assigns(:private_contacts).should eq(user.private_contacts)
     end
   end
 

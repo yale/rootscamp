@@ -1,4 +1,4 @@
-require 'rest-client'
+require "rest-client"
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
@@ -14,13 +14,12 @@ remote_users = RestClient.get list_attendees, { :params => EVENTBRITE }
 collection = JSON.parse(remote_users)["attendees"]
 collection.each do |attendee|
   u = attendee['attendee']
-  full_name = [u['first_name'], u['last_name']].join(' ')
-  unless User.exists?(:name => full_name)
-    user_params = {}
-    user_params.merge!(:name => full_name)
+  user_params = {}
+  user_params.merge!(:first_name => u['first_name'], :last_name => u['last_name'])
+  unless User.exists?(user_params)
     user_params.merge!(:company => u['company']) unless u['company'].blank?
     unless u['home_city'].blank?
-      user_params.merge!(:location => Location.create(:city => u['home_city']))
+      user_params.merge!(:raw_location => u['home_city'])
     end
     user = User.create(user_params)
   end

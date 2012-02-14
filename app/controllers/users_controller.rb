@@ -9,12 +9,13 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    render :nothing => true, :status => 404 unless @user
   end
 
   # GET /users/1/friends.json
-  def friends
+  def private_contacts
     @user    = User.find(params[:id])
-    @friends = @user.friends
+    @private_contacts = @user.private_contacts
   end
 
   # POST /users.json
