@@ -10,7 +10,7 @@ describe "Users" do
 
   describe "GET /users/:id.json" do
     it "returns 404 if user does not exist" do
-      User.stub(:find).and_return(nil)
+      User.stub(:find).and_raise(ActiveRecord::RecordNotFound)
       get user_path(1), :format => :json
       response.status.should == 404
     end

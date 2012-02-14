@@ -1,2 +1,2 @@
 object @user
-attributes :first, :last, :company, :phone, :email, :twitter, :raw_location, :lat, :long
+attributes :first_name, :last_name, :company, :phone, :email, :twitter, :raw_location, :lat, :long

@@ -117,4 +117,17 @@ describe UsersController do
     end
   end
 
+  describe "JSON views" do
+    render_views
+
+    describe "for GET show" do
+      it "renders the necessary attributes" do
+        user = User.create! valid_attributes
+        get :show, :id => user.id.to_s, :format => :json
+        json = JSON.parse(response.body)
+        json["first_name"].should == user.first_name
+        json["last_name"].should == user.last_name
+      end
+    end
+  end
 end
