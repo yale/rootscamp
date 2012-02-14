@@ -8,8 +8,11 @@ class UsersController < ApplicationController
 
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-    render :nothing => true, :status => 404 unless @user
+    begin
+      @user = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render :nothing => true, :status => 404 unless @user
+    end
   end
 
   # GET /users/1/friends.json
