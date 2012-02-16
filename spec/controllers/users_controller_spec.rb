@@ -35,16 +35,6 @@ describe UsersController do
     end
   end
     
-  describe "GET private_contacts" do
-    it "assigns user's contacts as @private_contacts" do
-      user = User.create! valid_attributes
-      contact = Factory.create :private_contact
-      user.add_contact!(contact)
-      get :private_contacts, :id => user.id.to_s, :format => :json
-      assigns(:private_contacts).should eq(user.private_contacts)
-    end
-  end
-
   describe "GET show" do
     it "assigns the requested user as @user" do
       user = User.create! valid_attributes

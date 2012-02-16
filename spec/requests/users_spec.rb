@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe "Users" do
+  def valid_attributes
+    VALID_ATTRIBUTES[:user]
+  end
+
+  before :each do
+    @user = Factory.create :user
+  end
+  
   describe "GET /users.json" do
     it "works!" do
       get users_path, :format => :json
@@ -9,10 +17,6 @@ describe "Users" do
   end
 
   describe "GET /users/:id.json" do
-    before :each do
-      @user = Factory.create :user
-    end
-
     def do_get
       get user_path(@user), :format => :json
     end
@@ -63,14 +67,29 @@ describe "Users" do
   end
 
   describe "POST /users.json" do
-
+    it "accepts valid attributes" do
+      post users_path, :format => :json, :user => valid_attributes
+      response.status.should == 201
+    end
   end
 
   describe "PUT /users/:id.json" do
+    def do_put parameters
+      put user_path(@user.id), parameters, format: :json
+    end
 
+    it "accepts valid attributes" do
+      do_put user: { email: "foo@bar.com" }
+      response.status.should == 204
+      User.find(@user.id).email.should == "foo@bar.com"
+    end
   end
 
   describe "DELETE /users/:id.json" do
+    it "deletes a user record" do
+      delete user_path(@user.id)
+      lambda { User.find(@user.id) }.should raise_error ActiveRecord::RecordNotFound
+    end
 
   end
 end

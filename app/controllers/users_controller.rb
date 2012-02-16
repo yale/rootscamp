@@ -15,12 +15,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/friends.json
-  def private_contacts
-    @user    = User.find(params[:id])
-    @private_contacts = @user.private_contacts
-  end
-
   # POST /users.json
   def create
     @user = User.new(params[:user])
