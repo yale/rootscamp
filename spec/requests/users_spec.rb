@@ -11,8 +11,13 @@ describe "Users" do
   
   describe "GET /users.json" do
     it "works!" do
-      get users_path, :format => :json
+      get users_path, format: :json
       response.status.should == 200
+    end
+
+    it "returns an array of user objects" do
+      get users_path, format: :json
+      JSON.parse(response.body).pop["first_name"].should_not be_nil
     end
   end
 
