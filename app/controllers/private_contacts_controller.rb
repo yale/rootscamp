@@ -3,7 +3,7 @@ class PrivateContactsController < ApplicationController
 
   # GET /users/:id/private_contacts.json
   def index
-    @private_contacts = PrivateContact.all
+    @private_contacts = User.find(params[:user_id]).private_contacts
   end
 
   # GET /users/:id/private_contacts/1.json
@@ -17,10 +17,10 @@ class PrivateContactsController < ApplicationController
 
   # POST /users/:id/private_contacts.json
   def create
-    @private_contact = PrivateContact.new(params[:private_contact])
+    @private_contact = User.find(params[:user_id]).private_contacts.create(params[:private_contact])
 
     if @private_contact.save
-      render json: @private_contact, status: :created, location: @private_contact
+      render json: @private_contact, status: :created, location: user_private_contact_url(@private_contact.user, @private_contact)
     else
       render json: @private_contact.errors, status: :unprocessable_entity
     end
