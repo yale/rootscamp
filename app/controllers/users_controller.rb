@@ -17,7 +17,9 @@ class UsersController < ApplicationController
 
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params[:user]) do |u|
+      u.id = params[:user][:id] if params[:user][:id]
+    end
 
     if @user.save
       render json: @user, status: :created, location: @user

@@ -1,4 +1,5 @@
 require "rest-client"
+require "csvoodoo"
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
@@ -8,19 +9,17 @@ require "rest-client"
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-EVENTBRITE = HashWithIndifferentAccess.new(YAML.load(File.read(Rails.root.join('config/keys/eventbrite.yml'))))[Rails.env]
-list_attendees = "http://www.eventbrite.com/json/event_list_attendees"
-remote_users = RestClient.get list_attendees, { :params => EVENTBRITE }
-collection = JSON.parse(remote_users)["attendees"]
-collection.each do |attendee|
-  u = attendee['attendee']
-  user_params = {}
-  user_params.merge!(:first_name => u['first_name'], :last_name => u['last_name'])
-  unless User.exists?(user_params)
-    user_params.merge!(:company => u['company']) unless u['company'].blank?
-    unless u['home_city'].blank?
-      user_params.merge!(:raw_location => u['home_city'])
+User.delete_all
+voodoo = CSVoodoo::Voodoo.new do
+  with_row do |row|
+    puts "Processing #{row}"
+    User.create(
+      first_name: row[:first_name],
+      last_name: row[:last_name],
+      company: row[:company]
+    ) do |u|
+      u.id = row[:code]
     end
-    user = User.create(user_params)
   end
 end
+voodoo.process('public/seed.csv')

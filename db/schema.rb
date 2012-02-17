@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216194121) do
+ActiveRecord::Schema.define(:version => 20120215182128) do
 
   create_table "private_contacts", :force => true do |t|
     t.integer "user_id"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(:version => 20120216194121) do
     t.string   "api_key"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "badge_id"
   end
 
 end
