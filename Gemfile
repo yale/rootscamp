@@ -40,6 +40,7 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'pry'
+  gem 'timecop'
 
   # To use debugger
   gem 'ruby-debug19', :require => 'ruby-debug'
