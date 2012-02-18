@@ -31,7 +31,7 @@ class PrivateContactsController < ApplicationController
     @private_contact = PrivateContact.find(params[:id])
 
     if @private_contact.update_attributes(params[:private_contact])
-      head :no_content
+      render json: @private_contact, status: :ok, location: user_private_contact_url(@private_contact.user, @private_contact)
     else
       render json: @private_contact.errors, status: :unprocessable_entity
     end
