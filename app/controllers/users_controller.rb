@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-      head :no_content
+      render json: @user, status: :ok, location: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end

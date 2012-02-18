@@ -76,6 +76,11 @@ describe "Users" do
       post users_path, :format => :json, :user => valid_attributes
       response.status.should == 201
     end
+
+    it "returns a representation of the posted user" do
+      post users_path, :format => :json, :user => valid_attributes
+      JSON.parse(response.body)["first_name"].should == valid_attributes[:first_name]
+    end
   end
 
   describe "PUT /users/:id.json" do
@@ -85,8 +90,13 @@ describe "Users" do
 
     it "accepts valid attributes" do
       do_put user: { email: "foo@bar.com" }
-      response.status.should == 204
+      response.status.should == 200
       User.find(@user.id).email.should == "foo@bar.com"
+    end
+
+    it "returns a representation of the posted user" do
+      do_put user: { email: "foo@bar.com" }
+      JSON.parse(response.body)["first_name"].should == @user.first_name
     end
   end
 
