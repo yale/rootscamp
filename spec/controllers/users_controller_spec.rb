@@ -33,6 +33,18 @@ describe UsersController do
       get :index, :format => :json
       assigns(:users).should eq([user])
     end
+
+    context "with a since date" do
+      it "only returns records after it" do
+        Timecop.travel(2.day.ago) do
+          User.create! valid_attributes
+        end
+        user = User.create! valid_attributes
+        unix_date = 1.days.ago.to_time.to_i
+        get :index, since: unix_date, format: :json
+        assigns(:users).should eq([user])
+      end
+    end
   end
     
   describe "GET show" do
