@@ -3,7 +3,7 @@ class PrivateContactsController < ApplicationController
 
   # GET /users/:id/private_contacts.json
   def index
-    @private_contacts = User.find(params[:user_id]).private_contacts.where(["updated_at > ?", params[:since] ? Time.at(params[:since].to_i) : 0])
+    @private_contacts = PrivateContact.where(user_id: params[:user_id], updated_at: Time.at(params[:since].to_i)..Time.now)
   end
 
   # GET /users/:id/private_contacts/1.json

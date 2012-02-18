@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users.json
   def index
-    @users = User.where(["updated_at > ?", params[:since] ? Time.at(params[:since].to_i) : 0])
+    @users = User.where(updated_at: Time.at(params[:since].to_i)..Time.now)
   end
 
   # GET /users/1.json

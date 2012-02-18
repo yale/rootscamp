@@ -18,13 +18,8 @@ describe "PrivateContacts" do
       get user_private_contacts_path(@user, @private_contact), format: :json
     end
 
-    it "finds the user" do
-      User.should_receive(:find).with(@user.id.to_s)
-      do_get
-    end
-
     it "finds the user's private contacts" do
-      @user.should_receive(:private_contacts).and_return([@private_contact])
+      PrivateContact.should_receive(:where).and_return([@private_contact])
       do_get
     end
 
